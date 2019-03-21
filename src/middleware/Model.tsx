@@ -40,4 +40,4 @@ class Model {
   private set (key: string, ele: any) { localStorage.setItem(key, JSON.stringify(ele)) }
 }
 
-export default Model
+export default new Model()
