@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assets/scss/common.scss';
+import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Model from './middleware/Model'
-
-const model = new Model()
-console.log(model)
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
