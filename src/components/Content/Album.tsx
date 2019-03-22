@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
-import { music } from 'middleware/Model'
+import { music, cart } from 'middleware/Model'
 import { numberFormat } from 'middleware/Util'
 import { StoreState } from 'store/modules'
 import { connect } from 'react-redux'
-import Highlighter from "react-highlight-words"
+import Highlighter from 'react-highlight-words'
+import { actionsCreators as cartActions } from 'store/modules/cart'
+import { bindActionCreators } from 'redux'
 
-interface Props {
-  list: music[]
+type Props = {
+  list: music[],
   category: string,
-  searchKey: string
+  searchKey: string,
+  CartActions: typeof cartActions
 }
 class Album extends Component<Props> {
   render () {
-    const { list, category, searchKey } = this.props
+    const { list, category, searchKey, CartActions } = this.props
+    const insertCart = (e:any, v:cart) => {
+      e.preventDefault()
+      CartActions.insert(v)
+    }
     return (
       <section className="album">
         <h3>{category}</h3>
@@ -28,7 +35,7 @@ class Album extends Component<Props> {
                 <dd>
                   <p className="date">{v.reg_date}</p>
                   <p className="price">\ {numberFormat(v.price)}</p>
-                  <p className="btm"><a href="#" className="btn main">카드담기</a></p>
+                  <p className="btm"><a href="#" className="btn main" onClick={(e:any) => insertCart(e, v)}>카드담기</a></p>
                 </dd>
               </dl>
             </li>
@@ -40,9 +47,13 @@ class Album extends Component<Props> {
 }
 
 export default connect(
-  ({ category, music }: StoreState) => ({
+  ({ music, cart }: StoreState) => ({
     list: music.list,
     category: music.category,
-    searchKey: music.searchKey
+    searchKey: music.searchKey,
+    cartList: cart.list
+  }),
+  dispatch => ({
+    CartActions: bindActionCreators(cartActions, dispatch),
   })
 )(Album)

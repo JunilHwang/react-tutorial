@@ -7,7 +7,7 @@ export interface cart {
   artist: string
   reg_date: string
   price: number,
-  cnt: number
+  cnt?: number
 }
 
 export interface music {
