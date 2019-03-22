@@ -40,7 +40,7 @@ class Model {
   private initMusic (): music[] { return require('../assets/data/data.json') }
   private initCategoryList (): string[] {
     const setList = new Set()
-    setList.add('All')
+    setList.add('ALL')
     this.music.forEach(v => setList.add(v.category))
     return Array.from(setList)
   }
