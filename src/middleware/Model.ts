@@ -1,5 +1,25 @@
-import music from '../interface/music'
-import cart from '../interface/cart'
+export interface cart {
+  idx: number
+  category: string
+  image: string
+  title: string
+  singer: string
+  artist: string
+  reg_date: string
+  price: number,
+  cnt: number
+}
+
+export interface music {
+  idx: number
+  category: string
+  image: string
+  title: string
+  singer: string
+  artist: string
+  reg_date: string
+  price: number
+}
 
 class Model {
   private category: number
@@ -15,11 +35,12 @@ class Model {
   }
 
   private initCategory (): number {
-    return this.get('category') !== null ? ~~this.get('category') : -1
+    return this.get('category') !== null ? ~~this.get('category') : 0
   }
   private initMusic (): music[] { return require('../assets/data/data.json') }
   private initCategoryList (): string[] {
     const setList = new Set()
+    setList.add('All')
     this.music.forEach(v => setList.add(v.category))
     return Array.from(setList)
   }
