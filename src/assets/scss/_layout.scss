@@ -25,3 +25,13 @@
   p+p{margin-top:10px;}
   .searched{background:#09F;color:#fff;}
 }
+span.middle{display:inline-block;vertical-align:middle;width:0;height:100%;
+  +*{display:inline-block;vertical-align:middle;}
+}
+.layer{position:fixed;left:0;right:0;top:0;bottom:0;background:fade-out(#000, 0.5);z-index:100;overflow:auto;text-align:center;
+  &-content{background:#fff;border-radius:3px;box-shadow:0 0 10px #666;padding:30px;margin:30px;overflow:hidden;position:relative;text-align:left;}
+  &-title{position:absolute;left:0;right:0;top:0;height:40px;line-height:40px;text-indent:15px;color:#fff;background:#09F;font-size:21px !important;}
+  a.close{position:absolute;right:0;top:0;width:40px;height:40px;display:block;text-align:center;line-height:40px;background:fade-out(#000,.5);color:#fff;z-index:10;text-decoration:none;transition:.3s;
+    &:hover{background:fade-out(#000, .6)}
+  }
+}

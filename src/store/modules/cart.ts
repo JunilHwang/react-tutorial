@@ -8,7 +8,7 @@ const CLEAR:string = 'cart/CLEAR'
 export const actionsCreators = {
   insert: createAction<cart>(INSERT),
   remove: createAction<number>(REMOVE),
-  clear: createAction<undefined>(CLEAR)
+  clear: createAction<void>(CLEAR)
 }
 export interface CartState { list: cart[] }
 
@@ -22,17 +22,20 @@ export default handleActions<CartState, any>({
     if (target !== undefined) {
       target.cnt && (target.cnt += 1)
     } else {
-      cart.cnt = 0
+      cart.cnt = 1
       list.push(cart)
     }
+    model.setCart(list)
     return { list }
   },
   [REMOVE]: (state, action:Action<number>) => {
     const list:cart[] = state.list.slice()
     list.splice(action.payload, 1)
+    model.setCart(list)
     return { list }
   },
   [CLEAR]: (state) => {
+    model.setCart([])
     return { list: [] }
   }
 }, initialState)

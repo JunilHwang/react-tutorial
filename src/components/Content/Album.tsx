@@ -11,14 +11,23 @@ type Props = {
   list: music[],
   category: string,
   searchKey: string,
+  cartList: cart[],
   CartActions: typeof cartActions
 }
 class Album extends Component<Props> {
   render () {
-    const { list, category, searchKey, CartActions } = this.props
+    const { list, category, searchKey, CartActions, cartList } = this.props
     const insertCart = (e:any, v:cart) => {
       e.preventDefault()
       CartActions.insert(v)
+    }
+    const getBtnClass = (idx:number) => {
+      const target:cart|undefined = cartList.find((v:cart) => v.idx === idx)
+      return target === undefined ? 'main' : 'point'
+    }
+    const getBtnText = (idx:number) => {
+      const target: cart | undefined = cartList.find((v: cart) => v.idx === idx)
+      return target === undefined ? '카트담기' : `추가하기 (${target.cnt})`
     }
     return (
       <section className="album">
@@ -34,8 +43,8 @@ class Album extends Component<Props> {
                 </dt>
                 <dd>
                   <p className="date">{v.reg_date}</p>
-                  <p className="price">\ {numberFormat(v.price)}</p>
-                  <p className="btm"><a href="#" className="btn main" onClick={(e:any) => insertCart(e, v)}>카드담기</a></p>
+                  <p className="price">₩ {numberFormat(v.price)}</p>
+                  <p className="btm"><a href="#" className={`btn ${getBtnClass(v.idx)}`} onClick={(e:any) => insertCart(e, v)}>{getBtnText(v.idx)}</a></p>
                 </dd>
               </dl>
             </li>

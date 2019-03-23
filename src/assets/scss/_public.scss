@@ -85,20 +85,6 @@ a.btn{text-decoration:none;text-align:center;}
   }
 }
 
-/* layer */
-.layer{position:fixed;left:0;right:0;top:0;bottom:0;text-align:center;background:fade-out(#000, .7);overflow:auto;z-index:100;
-  >div{background:#FFF;padding:20px;margin:20px;position:relative;text-align:left;
-    >a.close{color:#FFF;background:$color-blue-lighten-10;display:flex;width:40px;height:40px;align-items:center;justify-content:center;font-size:17px;position:absolute;right:0;top:0;text-decoration:none;opacity:.7;transition:.3s;
-      &:hover{opacity:1;}
-    }
-  }
-  .layer-title{padding:0 10px;line-height:40px;margin:-20px -20px 20px;font-size:17px;background:$color-blue-darken-10;color:#fff;}
-  @include mobile () {
-    >div{width:calc(100% - 80px);}
-    .layer-title{font-size:15px;}
-  }
-}
-
 /* table-wrap */
 .table-wrap{
   table{width:100%;border-spacing:0;border-collapse:collapse;}
