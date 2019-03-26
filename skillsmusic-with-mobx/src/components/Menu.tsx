@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
+import { IMusicStore } from 'store/MusicStore'
+import { Category } from 'model/MusicModel'
 
-class Menu extends Component  {
+type Props = { music?: IMusicStore }
+@inject('music')
+@observer
+class Menu extends Component<Props>  {
   render() {
+    const { categoryList = [], category = 'ALL' } = this.props.music!
     return (
       <nav className="site-menu">
         <h2><a href="#">Category</a></h2>
         <ul>
-          <li><a href="#">ALL</a></li>
-          <li><a href="#" className="active">cate01</a></li>
-          <li><a href="#">cate02</a></li>
-          <li><a href="#">cate03</a></li>
-          <li><a href="#">cate04</a></li>
-          <li><a href="#">cate05</a></li>
+          {categoryList.map((v:Category, k:number) =>
+            <li key={k}><a href="#" className={v === category ? 'active' : ''}>{v}</a></li>
+          )}
         </ul>
       </nav>
     )

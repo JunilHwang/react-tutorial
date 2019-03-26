@@ -13,7 +13,7 @@ class Album extends Component  {
                 <dt>가수01 - Lorem</dt>
                 <dd>
                   <p className="date">2019-03-01</p>
-                  <p className="price">\ 11,000</p>
+                  <p className="price">₩ 11,000</p>
                   <p className="btm"><a href="#" className="btn point">추가하기 (1)</a></p>
                 </dd>
               </dl>

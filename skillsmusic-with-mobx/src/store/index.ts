@@ -1,20 +1,20 @@
 import MusicStore from './MusicStore'
-import CategoryStore from './CategoryStore'
 import CartStore from './CartStore'
+import LayerStore from './LayerStore'
 
 export interface IRootStore {
   music: MusicStore
-  category: CategoryStore
   cart: CartStore
+  layer: LayerStore
 }
 class RootStore implements IRootStore {
   public music: MusicStore
-  public category: CategoryStore
   public cart: CartStore
+  public layer: LayerStore
   constructor() {
-    this.music = new MusicStore(this)
-    this.category = new CategoryStore(this)
-    this.cart = new CartStore(this)
+    this.music    = new MusicStore(this)
+    this.cart     = new CartStore(this)
+    this.layer    = new LayerStore(this)
   }
 }
 export default new RootStore()
