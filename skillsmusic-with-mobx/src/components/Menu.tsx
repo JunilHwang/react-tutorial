@@ -8,13 +8,17 @@ type Props = { music?: IMusicStore }
 @observer
 class Menu extends Component<Props>  {
   render() {
-    const { categoryList = [], category = 'ALL' } = this.props.music!
+    const { categoryList = [], category = 'ALL', setCategory } = this.props.music!
     return (
       <nav className="site-menu">
         <h2><a href="#">Category</a></h2>
         <ul>
           {categoryList.map((v:Category, k:number) =>
-            <li key={k}><a href="#" className={v === category ? 'active' : ''}>{v}</a></li>
+            <li key={k}>
+              <a href="#"
+                 className={v === category ? 'active' : ''}
+                 onClick={(e:any) => setCategory(e, v)}>{v}</a>
+            </li>
           )}
         </ul>
       </nav>

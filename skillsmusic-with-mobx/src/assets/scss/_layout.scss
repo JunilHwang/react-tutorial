@@ -21,7 +21,9 @@
   ul:after{content:"";display:block;clear:both;}
   li{float:left;width:280px;margin:10px;}
   .img-wrap{height:280px;line-height:280px;}
-  dt{font-size:21px;margin-bottom:10px;}
+  dt{font-size:21px;margin-bottom:10px;
+    strong{color:#09f;}
+  }
   p+p{margin-top:10px;}
   .searched{background:#09F;color:#fff;}
 }

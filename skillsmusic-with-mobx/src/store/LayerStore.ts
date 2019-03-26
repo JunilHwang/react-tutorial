@@ -13,11 +13,11 @@ export default class LayerStore implements ILayerStore {
   @observable public layerState:string|null = null
   @observable public layerData:object|null = null
   constructor(root: IRootStore) { this.root = root }
-  @action open (e:any, layer:string, layerData:object|null = null):void {
+  @action open = (e:any, layer:string, layerData:object|null = null):void => {
     this.layerState = layer
     this.layerData = layerData
   }
-  @action close (e:any):void {
+  @action close = (e:any):void => {
     e.preventDefault()
     this.layerState = null
     this.layerData = null

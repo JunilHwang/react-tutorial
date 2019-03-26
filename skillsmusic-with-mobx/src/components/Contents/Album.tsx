@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
+import { Music } from 'model/MusicModel'
+import { IMusicStore } from 'store/MusicStore'
+import { numberFormat } from 'middleware/Util'
 
-class Album extends Component  {
+type Props = { music?: IMusicStore }
+@inject('music')
+@observer
+class Album extends Component<Props>  {
   render() {
+    const { musicList } = this.props.music!
     return (
-
       <section className="album">
         <h3>cate01</h3>
         <ul>
-          <li>
-            <div className="img-wrap"><img src={require('assets/images/729294.jpg')} alt="img01" /></div>
+          {musicList.map((v:Music, k:number) =>
+            <li key={k}>
+              <div className="img-wrap"><img src={require(`assets/images/${v.albumJaketImage}`)} alt={v.albumJaketImage} /></div>
               <dl>
-                <dt>가수01 - Lorem</dt>
+                <dt>
+                  <strong>{v.artist}</strong>
+                  <p>{v.albumName}</p>
+                </dt>
                 <dd>
-                  <p className="date">2019-03-01</p>
-                  <p className="price">₩ 11,000</p>
-                  <p className="btm"><a href="#" className="btn point">추가하기 (1)</a></p>
+                  <p className="date">{v.release}</p>
+                  <p className="price">₩ {numberFormat(v.price)}</p>
+                  <p className="btm"><a href="#" className="btn main">카트등록</a></p>
                 </dd>
               </dl>
-          </li>
+            </li>)}
         </ul>
       </section> 
     )

@@ -8,7 +8,7 @@ export interface IMusicStore {
   musicList: Music[]
   categoryList: Category[]
   category: Category
-  setCategory(category:Category): void
+  setCategory(e:any, category:Category): void
 }
 
 export default class MusicStore implements IMusicStore {
@@ -24,8 +24,10 @@ export default class MusicStore implements IMusicStore {
     this.musicList = musicRepository.getMusicList(this.category)
   }
 
-  @action setCategory (category:Category):void {
+  @action setCategory = (e:any, category:Category):void => {
+    e.preventDefault()
     this.category = category
+    this.musicList = musicRepository.getMusicList(category)
     musicRepository.setCategory(category)
   }
 }
