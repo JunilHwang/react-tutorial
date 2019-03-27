@@ -1,4 +1,5 @@
 export type Music = {
+  idx: number
   category: string
   albumJaketImage: string
   albumName: string

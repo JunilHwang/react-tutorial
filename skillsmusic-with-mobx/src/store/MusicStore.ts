@@ -8,27 +8,30 @@ export interface IMusicStore {
   musicList: Music[]
   categoryList: Category[]
   category: Category
+  searchKey: string
   setCategory(e:any, category:Category): void
+  searchMusic(e:any, searchKey:string): void
 }
 
 export default class MusicStore implements IMusicStore {
   private root: IRootStore
-  @observable public musicList:Music[]
-  @observable public categoryList:Category[]
-  @observable public category:Category
+  @observable public categoryList: Category[] = musicRepository.getCategoryList()
+  @observable public category: Category = MusicRepository.getCategory()
+  @observable public searchKey: string = ''
+  @observable public musicList: Music[] = musicRepository.getMusicList(this.category)
 
-  constructor(root: IRootStore) {
-    this.root = root
-    this.categoryList = musicRepository.getCategoryList()
-    this.category = MusicRepository.getCategory()
-    this.musicList = musicRepository.getMusicList(this.category)
-  }
+  constructor(root: IRootStore) { this.root = root }
 
   @action setCategory = (e:any, category:Category):void => {
     e.preventDefault()
     this.category = category
     this.musicList = musicRepository.getMusicList(category)
     musicRepository.setCategory(category)
+  }
+
+  @action searchMusic = (e:any, searchKey:string):void => {
+    e.preventDefault()
+    this.musicList = musicRepository.getMusicList(this.category, this.searchKey = searchKey)
   }
 }
  

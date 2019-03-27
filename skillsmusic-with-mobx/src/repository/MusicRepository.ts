@@ -1,17 +1,25 @@
 import MusicData from 'assets/data/music_data.json'
 import {Music, Category} from 'model/MusicModel'
 interface IMusicRepository {
-  getMusicList(category: Category): Music[]
+  getMusicList(category: Category, searchKey: string): Music[]
   getCategoryList(): Category[]
   getCategory(): Category
   setCategory(v:Category): void
 }
 class MusicRepository implements IMusicRepository {
   private musicList: Music[]
-  constructor () { this.musicList = MusicData.data.map(v => ({...v, price: parseInt(v.price)}) as Music) }
-  getMusicList (category = 'ALL'): Music[] {
+  constructor () {
+    this.musicList = MusicData.data.map((v:any, k:number) => ({...v, price: parseInt(v.price), idx: k+1}) as Music)
+  }
+  getMusicList (category = 'ALL', searchKey = ''): Music[] {
     return this.musicList.slice().filter((v:Music) => {
-      return category === 'ALL' || v.category === category
+      const bool:Boolean = category === 'ALL' || v.category === category
+      if (searchKey.length === 0) {
+        return bool
+      } else {
+        const bool2 = v.artist.indexOf(searchKey) !== -1 || v.albumName.indexOf(searchKey) !== -1
+        return bool && bool2
+      }
     })
   }
   getCategoryList (): Category[] {
